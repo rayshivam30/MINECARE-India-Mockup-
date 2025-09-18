@@ -19,6 +19,17 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
+import dynamic from 'next/dynamic';
+
+// Import the SimpleMap component with SSR disabled
+const SimpleMap = dynamic(() => import('@/components/mineral/SimpleMap'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[600px] bg-muted/30 rounded-xl flex items-center justify-center">
+      <p>Loading map...</p>
+    </div>
+  )
+});
 
 export default function HomePage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -295,6 +306,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <SimpleMap />
 
       <section className="py-20 px-4 bg-gradient-to-br from-muted/30 to-card/50">
         <div className="container mx-auto">
